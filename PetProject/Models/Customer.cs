@@ -9,5 +9,7 @@ namespace PetProject.Models
     public class Customer : IdentityUser
     {
         public ICollection<Order> Orders { get; set; }
+        public IEnumerable<Product> Products { get; set; }
+        public int Funds { get; set; }
     }
 }

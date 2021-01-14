@@ -1,0 +1,20 @@
+﻿@page
+@model PetProject.Pages.ProductModel
+@{
+}
+<div class="card">
+    <div class="card">
+        <div class="card-body">
+            <h2 class="card-text">@Model.Product.Name</h2>
+        </div>
+        @if (Model.Product.Rating.HasValue)
+        {
+            <p class="card-text">Ratings: @Model.Product.Rating / 10</p>
+        }
+        else
+        {
+            <p class="card-text">Ratings: N/A</p>
+        }
+        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
+    </div>
+</div>

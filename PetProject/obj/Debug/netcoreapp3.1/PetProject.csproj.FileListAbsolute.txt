@@ -92,3 +92,4 @@ C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.dll
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.pdb
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.genruntimeconfig.cache
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Pages\Product.cshtml.g.cs
