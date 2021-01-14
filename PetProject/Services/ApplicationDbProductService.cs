@@ -31,7 +31,7 @@ namespace PetProject.Services
         {
             return _context.Reviews
                 .Where(p => p.ProductId == id)
-                .OrderBy(p => p.Customer.UserName);
+                .OrderBy(p => p.CustomerName);
         }
     }
 }
