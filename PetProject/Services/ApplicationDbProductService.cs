@@ -9,22 +9,27 @@ namespace PetProject.Services
 {
     public class ApplicationDbProductService
     {
-        public IEnumerable<Product> GetAllProducts(ApplicationDbContext context)
+        private readonly ApplicationDbContext _context;
+        public ApplicationDbProductService(ApplicationDbContext context)
         {
-            return context.Products
+            _context = context;
+        }
+        public IEnumerable<Product> GetAllProducts()
+        {
+            return _context.Products
                 .Where(p => p.Amount > 0)
                 .OrderBy(p => p.Name);
         }
 
-        public Product GetProduct(ApplicationDbContext context, int id)
+        public Product GetProduct(int id)
         {
-            return context.Products
+            return _context.Products
                 .First(p => p.Id == id);
         }
 
-        public IEnumerable<Review> GetReviews(ApplicationDbContext context, int id)
+        public IEnumerable<Review> GetReviews(int id)
         {
-            return context.Reviews
+            return _context.Reviews
                 .Where(p => p.ProductId == id)
                 .OrderBy(p => p.Customer.UserName);
         }
