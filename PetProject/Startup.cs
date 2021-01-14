@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PetProject.Models;
+using PetProject.Services;
 
 namespace PetProject
 {
@@ -33,6 +34,7 @@ namespace PetProject
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<Customer>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<ApplicationDbProductService>();
             services.AddRazorPages();
         }
 
