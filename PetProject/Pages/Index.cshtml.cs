@@ -29,6 +29,5 @@ namespace PetProject.Pages
             Products = ProductService.GetAllProducts();
         }
 
-        
     }
 }

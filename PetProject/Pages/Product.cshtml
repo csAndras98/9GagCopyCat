@@ -8,21 +8,14 @@
         <div class="card-body">
             <h2 class="card-text">@Model.Product.Name</h2>
         </div>
-        @if (Model.Product.Rating.HasValue)
-        {
-            <p class="card-text">Ratings: @Model.Product.Rating / 10</p>
-        }
-        else
-        {
-            <p class="card-text">Ratings: N/A</p>
-        }
+        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name">
         @if (Model.SignInManager.IsSignedIn(User))
         {
             <form method="post">
-                <input type="submit" value="Buy" asp-page-handler="Buyme" asp-route-ID="@Model.Product.Id" />
+                <input type="button" value="Buy" asp-page-handler="Buyme" asp-route-ID="@Model.Product.Id" />
             </form>
         }
-        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
+        <div class="card-text">@Model.Product.Descriptions</div>
 
     </div>
 </div>

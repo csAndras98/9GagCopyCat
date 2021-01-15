@@ -7,7 +7,7 @@
     <h1 class="display-4">@Model.Customer.UserName</h1>
     </div>
 
-<div class="card-deck">
+<div class="card-columns">
     @foreach (var product in Model.Products)
     {
         <div class="card">
@@ -15,14 +15,6 @@
                 <div class="card-body">
                     <h3 class="card-text">@product.Name</h3>
                 </div>
-                @if (product.Rating.HasValue)
-                {
-                    <p class="card-text">Ratings: @product.Rating / 10</p>
-                }
-                else
-                {
-                    <p class="card-text">Ratings: N/A</p>
-                }
                 <img class="card-img-top" src="@product.Image" alt="@product.Name" style="height:100%">
             </a>
         </div>

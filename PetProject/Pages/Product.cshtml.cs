@@ -28,6 +28,7 @@ namespace PetProject.Pages
             Product = ProductService.GetProduct(id);
             Reviews = ProductService.GetReviews(id);
         }
+
         public RedirectToPageResult OnPostBuyMe(int id)
         {
             ProductService.Buy(ProductService.GetCustomer(User.FindFirst(ClaimTypes.NameIdentifier).Value), ProductService.GetProduct(id));
