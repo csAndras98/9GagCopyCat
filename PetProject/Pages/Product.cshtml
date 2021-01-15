@@ -4,18 +4,28 @@
     ViewData["Title"] = Model.Product.Name;
 }
 <div class="card">
-    <div class="card">
+    <div class="card" style=" border-color: #f44336">
         <div class="card-body">
             <h2 class="card-text">@Model.Product.Name</h2>
         </div>
-        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name">
+        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
+        
+        <div class="card" style=" background-color: darkgrey; border-color: #f44336">@Model.Product.Descriptions</div>
+
         @if (Model.SignInManager.IsSignedIn(User))
         {
             <form method="post">
-                <input type="button" value="Buy" asp-page-handler="Buyme" asp-route-ID="@Model.Product.Id" />
+                <input type="submit" value="Buy Me" style="background-color: #f44336;
+                                                    border:none;
+                                                    text-align:center;
+                                                    color:snow;
+                                                    display:block;
+                                                    margin: 10px 0;
+                                                    padding: 10px;
+                                                    width: 100%;
+                                                    " asp-page-handler="Buyme" asp-route-ID="@Model.Product.Id" />
             </form>
         }
-        <div class="card-text">@Model.Product.Descriptions</div>
 
     </div>
 </div>
