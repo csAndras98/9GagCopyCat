@@ -16,14 +16,13 @@
         {
             <p class="card-text">Ratings: N/A</p>
         }
-        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
-        @foreach (var review in Model.Reviews)
+        @if (Model.SignInManager.IsSignedIn(User))
         {
-            <div class="card">
-                <h3 class="card-header">@review.Customer.UserName</h3>
-                <h2 class="card-text">@review.Rating / 10</h2>
-                <div class="card-text">@review.Comment</div>
-            </div>
+            <form method="post">
+                <input type="submit" value="Buy" asp-page-handler="Buyme" asp-route-ID="@Model.Product.Id" />
+            </form>
         }
+        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
+
     </div>
 </div>

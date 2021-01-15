@@ -39,11 +39,36 @@ namespace PetProject.Services
                 {
                     if (order.Customer.Equals(customer) && productOrder.OrderId.Equals(order.Id))
                     {
-                        result.Add(productOrder.Product);
+                        result.Add(_context.Products.FirstOrDefault(p => p.Id == productOrder.ProductId));
                     }
                 }
             }
             return result;
+        }
+
+        internal void Buy(Customer customer, Product product)
+        {
+            if(customer.Funds >= product.Amount)
+            {
+                customer.Funds -= product.Amount;
+
+                Order order = new Order()
+                {
+                    Customer = customer,
+                    Date = DateTime.Now,
+                    ProductOrders = new List<ProductOrder>()
+                };
+                ProductOrder productOrder = new ProductOrder()
+                {
+                    Order = order,
+                    Product = product
+                };
+                order.ProductOrders.Add(productOrder);
+
+                _context.Add(order);
+                _context.Add(productOrder);
+            }
+            _context.SaveChanges();
         }
 
         public IEnumerable<Review> GetReviews(int id)
