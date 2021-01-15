@@ -11,7 +11,7 @@ namespace PetProject.Models
         public int ProductId { get; set; }
         public int Rating { get; set; }
         public string Comment { get; set; }
-        public string CustomerName { get; set; }
+        public Customer Customer { get; set; }
         public Product Product { get; set; }
     }
 }

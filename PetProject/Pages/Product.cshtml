@@ -1,6 +1,7 @@
 ﻿@page
 @model PetProject.Pages.ProductModel
 @{
+    ViewData["Title"] = Model.Product.Name;
 }
 <div class="card">
     <div class="card">
@@ -19,7 +20,7 @@
         @foreach (var review in Model.Reviews)
         {
             <div class="card">
-                <h3 class="card-header">@review.CustomerName</h3>
+                <h3 class="card-header">@review.Customer.UserName</h3>
                 <h2 class="card-text">@review.Rating / 10</h2>
                 <div class="card-text">@review.Comment</div>
             </div>
