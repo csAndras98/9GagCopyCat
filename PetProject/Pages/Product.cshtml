@@ -9,7 +9,7 @@
             <h2 class="card-text">@Model.Product.Name</h2>
         </div>
         <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
-        
+
         <div class="card" style=" background-color: darkgrey; border-color: #f44336">@Model.Product.Descriptions</div>
 
         @if (Model.SignInManager.IsSignedIn(User))
