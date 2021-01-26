@@ -24,7 +24,7 @@ namespace PetProject.Pages
         public void OnGet(string id)
         {
             Customer = ProductService.GetCustomer(id);
-            Products = ProductService.GetMyProducts(Customer);
+            Products = ProductService.GetMyProducts(id);
         }
     }
 }

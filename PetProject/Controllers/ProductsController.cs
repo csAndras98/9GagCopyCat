@@ -67,9 +67,9 @@ namespace PetProject.Controllers
             Customer customer = _context.Users.Find(userId);
             Product product = _context.Products.Find(id);
 
-            if (customer.Funds >= product.Amount)
+            if (customer.Funds >= product.Price)
             {
-                customer.Funds -= product.Amount;
+                customer.Funds -= product.Price;
 
                 Order order = new Order()
                 {

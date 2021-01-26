@@ -31,7 +31,7 @@ namespace PetProject.Pages
 
         public RedirectToPageResult OnPostBuyMe(int id)
         {
-            ProductService.Buy(ProductService.GetCustomer(User.FindFirst(ClaimTypes.NameIdentifier).Value), ProductService.GetProduct(id));
+            ProductService.Buy(User.FindFirst(ClaimTypes.NameIdentifier).Value, id);
             return RedirectToPage("./Index");
         }
     }

@@ -20,7 +20,6 @@ namespace PetProject.Services
         public IEnumerable<Product> GetAllProducts()
         {
             return _context.Products
-                .Where(p => p.Amount > 0)
                 .OrderBy(p => p.Name);
         }
 
@@ -30,14 +29,14 @@ namespace PetProject.Services
                 .First(p => p.Id == id);
         }
 
-        public IEnumerable<Product> GetMyProducts(Customer customer)
+        public IEnumerable<Product> GetMyProducts(string id)
         {
             List<Product> result = new List<Product>();
             foreach(Order order in _context.Orders)
             {
                 foreach(ProductOrder productOrder in _context.ProductOrders)
                 {
-                    if (order.Customer.Equals(customer) && productOrder.OrderId.Equals(order.Id))
+                    if (order.CustomerId.Equals(id) && productOrder.OrderId.Equals(order.Id))
                     {
                         result.Add(_context.Products.FirstOrDefault(p => p.Id == productOrder.ProductId));
                     }
@@ -46,11 +45,13 @@ namespace PetProject.Services
             return result;
         }
 
-        internal void Buy(Customer customer, Product product)
+        internal void Buy(string customerId, int productId)
         {
-            if(customer.Funds >= product.Amount)
+            Customer customer = _context.Users.Find(customerId);
+            Product product = _context.Products.Find(productId);
+            if(customer.Funds >= product.Price)
             {
-                customer.Funds -= product.Amount;
+                customer.Funds -= product.Price;
 
                 Order order = new Order()
                 {
