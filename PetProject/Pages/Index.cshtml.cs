@@ -14,13 +14,13 @@ namespace PetProject.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
+        public SignInManager<AppUser> SignInManager;
         public ApplicationDbService DbService;
         public IEnumerable<Fighter> Fighters { get; private set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbService dbService)
+        public IndexModel(SignInManager<AppUser> signInManager, ApplicationDbService dbService)
         {
-            _logger = logger;
+            SignInManager = signInManager;
             DbService = dbService;
         }
 
@@ -32,6 +32,11 @@ namespace PetProject.Pages
         public void OnPostRoll()
         {
             Fighters = DbService.RandomFighters();
+        }
+
+        public void OnPostBuy(Fighter fighter)
+        {
+            DbService.BuyFighter(fighter, DbService.GetUser(User.FindFirst(ClaimTypes.NameIdentifier).Value));
         }
     }
 }

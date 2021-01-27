@@ -32,6 +32,7 @@ namespace PetProject.Services
         {
             if(user.Funds >= fighter.Price)
             {
+                fighter.User = user;
                 _context.Add(fighter);
                 _context.SaveChanges();
             }
@@ -46,14 +47,14 @@ namespace PetProject.Services
             {
                 fighters[i] = new Fighter()
                 {
-                    Health = Random.Next(60, 100),
+                    Health = Random.Next(60, 101),
                     Morale = 100,
-                    Accuracy = Random.Next(40, 90),
-                    Initiative = Random.Next(1, 3),
-                    Power = Random.Next(10, 20),
-                    Level = Random.Next(1, 3),
-                    Name = _context.Names.Find(Random.Next(1, 2)).CharName,
-                    Image = _context.Portraits.Find(Random.Next(1, 2)).Image
+                    Accuracy = Random.Next(40, 91),
+                    Initiative = Random.Next(1, 4),
+                    Power = Random.Next(10, 21),
+                    Level = Random.Next(1, 4),
+                    Name = _context.Names.Find(Random.Next(1, 4)).CharName,
+                    Image = _context.Portraits.Find(Random.Next(1, 4)).Image
                 };
             }
             return fighters;
