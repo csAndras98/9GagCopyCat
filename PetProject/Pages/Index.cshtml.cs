@@ -18,16 +18,20 @@ namespace PetProject.Pages
         public ApplicationDbService DbService;
         public IEnumerable<Fighter> Fighters { get; private set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbService productService)
+        public IndexModel(ILogger<IndexModel> logger, ApplicationDbService dbService)
         {
             _logger = logger;
-            DbService = productService;
+            DbService = dbService;
         }
 
         public void OnGet()
         {
-            
+            Fighters = DbService.RandomFighters(); 
         }
 
+        public void OnPostRoll()
+        {
+            Fighters = DbService.RandomFighters();
+        }
     }
 }
