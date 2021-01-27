@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PetProject.Models
 {
-    public class Customer : IdentityUser
+    public class AppUser : IdentityUser
     {
-        public ICollection<Order> Orders { get; set; }
-        public IEnumerable<Product> Products { get; set; }
+        public int DungeonRank { get; set; }
+        public int Best { get; set; }
         public int Funds { get; set; }
     }
 }

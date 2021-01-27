@@ -7,15 +7,12 @@ using PetProject.Models;
 
 namespace PetProject.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Customer>
+    public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<ProductOrder> ProductOrders { get; set; }
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Fighter> Fighters { get; set; }
     }
 }

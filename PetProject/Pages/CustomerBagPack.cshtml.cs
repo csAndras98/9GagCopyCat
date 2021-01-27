@@ -13,18 +13,18 @@ namespace PetProject.Pages
 {
     public class CustomerBagPackModel : PageModel
     {
-        public Customer Customer { get; private set; }
-        public IEnumerable<Product> Products { get; set; }
-        public ApplicationDbProductService ProductService { get; }
+        public AppUser AppUser { get; private set; }
+        public IEnumerable<Fighter> Fighters { get; set; }
+        public ApplicationDbService DbService { get; }
 
-        public CustomerBagPackModel(ApplicationDbProductService productService)
+        public CustomerBagPackModel(ApplicationDbService dbService)
         {
-            ProductService = productService;
+            DbService = dbService;
         }
         public void OnGet(string id)
         {
-            Customer = ProductService.GetCustomer(id);
-            Products = ProductService.GetMyProducts(id);
+            AppUser = DbService.GetUser(id);
+            Fighters = DbService.GetMyFighters(id);
         }
     }
 }

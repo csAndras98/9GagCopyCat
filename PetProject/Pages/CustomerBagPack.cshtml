@@ -1,21 +1,21 @@
 ﻿@page
 @model PetProject.Pages.CustomerBagPackModel
 @{
-    ViewData["Title"] = Model.Customer.UserName;
+    ViewData["Title"] = Model.AppUser.UserName;
 }
 <div class="text-center">
-    <h1 class="display-4">@Model.Customer.UserName</h1>
+    <h1 class="display-4">@Model.AppUser.UserName</h1>
     </div>
 
 <div class="card-columns">
-    @foreach (var product in Model.Products)
+    @foreach (var fighter in Model.Fighters)
     {
         <div class="card">
-            <a asp-page="Product" asp-route-ID="@product.Id" title="">
+            <a asp-page="Product" asp-route-ID="@fighter.Id" title="">
                 <div class="card-body">
-                    <h3 class="card-text">@product.Name</h3>
+                    <h3 class="card-text">@fighter.Name</h3>
                 </div>
-                <img class="card-img-top" src="@product.Image" alt="@product.Name" style="height:100%">
+                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
             </a>
         </div>
     }

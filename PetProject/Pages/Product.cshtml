@@ -1,16 +1,14 @@
 ﻿@page
 @model PetProject.Pages.ProductModel
 @{
-    ViewData["Title"] = Model.Product.Name;
+    ViewData["Title"] = Model.Fighter.Name;
 }
 <div class="card">
     <div class="card" style=" border-color: #f44336">
         <div class="card-body">
-            <h2 class="card-text">@Model.Product.Name</h2>
+            <h2 class="card-text">@Model.Fighter.Name</h2>
         </div>
-        <img class="card-img-top" src="@Model.Product.Image" alt="@Model.Product.Name" style="height:100%">
-
-        <div class="card" style=" background-color: darkgrey; border-color: #f44336">@Model.Product.Descriptions</div>
+        <img class="card-img-top" src="@Model.Fighter.Image" alt="@Model.Fighter.Name" style="height:100%">
 
         @if (Model.SignInManager.IsSignedIn(User))
         {
@@ -23,7 +21,7 @@
                                                     margin: 10px 0;
                                                     padding: 10px;
                                                     width: 100%;
-                                                    " asp-page-handler="Buyme" asp-route-ID="@Model.Product.Id" />
+                                                    " asp-page-handler="Buyme" asp-route-ID="@Model.Fighter.Id" />
             </form>
         }
 

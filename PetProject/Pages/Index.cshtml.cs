@@ -15,18 +15,18 @@ namespace PetProject.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public ApplicationDbProductService ProductService;
-        public IEnumerable<Product> Products { get; private set; }
+        public ApplicationDbService DbService;
+        public IEnumerable<Fighter> Fighters { get; private set; }
 
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbProductService productService)
+        public IndexModel(ILogger<IndexModel> logger, ApplicationDbService productService)
         {
             _logger = logger;
-            ProductService = productService;
+            DbService = productService;
         }
 
         public void OnGet()
         {
-            Products = ProductService.GetAllProducts();
+            
         }
 
     }

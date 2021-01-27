@@ -32,9 +32,9 @@ namespace PetProject
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<Customer>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddTransient<ApplicationDbProductService>();
+            services.AddTransient<ApplicationDbService>();
             services.AddRazorPages();
         }
 

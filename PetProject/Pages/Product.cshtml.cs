@@ -13,25 +13,24 @@ namespace PetProject.Pages
 {
     public class ProductModel : PageModel
     {
-        private readonly ApplicationDbProductService ProductService;
-        public Product Product { get; private set; }
-        public SignInManager<Customer> SignInManager;
-        public IEnumerable<Review> Reviews { get; private set; }
-        public ProductModel(ApplicationDbProductService productService, SignInManager<Customer> signInManager)
+        private readonly ApplicationDbService DbService;
+        public Fighter Fighter { get; private set; }
+        public SignInManager<AppUser> SignInManager;
+        public ProductModel(ApplicationDbService dbService, SignInManager<AppUser> signInManager)
         {
-            ProductService = productService;
+            DbService = dbService;
             SignInManager = signInManager;
         }
 
         public void OnGet(int id)
         {
-            Product = ProductService.GetProduct(id);
-            Reviews = ProductService.GetReviews(id);
+            Fighter = DbService.GetFighter(id);
         }
 
         public RedirectToPageResult OnPostBuyMe(int id)
         {
-            ProductService.Buy(User.FindFirst(ClaimTypes.NameIdentifier).Value, id);
+            AppUser user = DbService.GetUser(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            DbService.BuyFighter(new Fighter(), user);
             return RedirectToPage("./Index");
         }
     }
