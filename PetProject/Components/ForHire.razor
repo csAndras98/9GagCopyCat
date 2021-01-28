@@ -55,6 +55,7 @@
     void Buy(Fighter fighter)
     {
         DbService.BuyFighter(fighter, User);
+        Fighters.Remove(fighter);
     }
 
     protected override async Task OnInitializedAsync()

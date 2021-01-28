@@ -32,9 +32,20 @@ namespace PetProject.Services
         {
             if(user.Funds >= fighter.Price)
             {
-                fighter.User = user;
-                fighter.UserId = user.Id;
-                _context.Add(fighter);
+                _context.Add(new Fighter() 
+                {
+                    Image = fighter.Image,
+                    Name = fighter.Name,
+                    Price = fighter.Price,
+                    Level = fighter.Level,
+                    Morale = fighter.Morale,
+                    Health = fighter.Health,
+                    Accuracy = fighter.Accuracy,
+                    Power = fighter.Power,
+                    Initiative = fighter.Initiative,
+                    UserId = user.Id
+                }
+                );
                 _context.SaveChanges();
             }
         }
