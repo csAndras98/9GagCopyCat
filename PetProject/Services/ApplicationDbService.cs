@@ -33,6 +33,7 @@ namespace PetProject.Services
             if(user.Funds >= fighter.Price)
             {
                 fighter.User = user;
+                fighter.UserId = user.Id;
                 _context.Add(fighter);
                 _context.SaveChanges();
             }
