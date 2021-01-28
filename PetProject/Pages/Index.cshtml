@@ -15,27 +15,26 @@
 
             @foreach (var fighter in Model.Fighters)
             {
-
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="card-text">@fighter.Name</h3>
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-text">@fighter.Name</h3>
+                    </div>
+                    <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                    <div class="card-text">
+                        <p>
+                            @fighter.Level
+                        </p>
+                        <p>
+                            @fighter.Price
+                        </p>
+                    </div>
+                    @if (Model.SignInManager.IsSignedIn(User))
+                    {
+                        <form method="post">
+                            <input type="submit" value="Buy" asp-page-handler="Buy" asp-route-Fighter="@fighter" />
+                        </form>
+                        }
                 </div>
-                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                <div class="card-text">
-                    <p>
-                        @fighter.Level
-                    </p>
-                    <p>
-                        @fighter.Price
-                    </p>
-                </div>
-                @if (Model.SignInManager.IsSignedIn(User))
-                {
-                    <form method="post">
-                        <input type="submit" value="Buy" asp-page-handler="Buy" asp-route-fighter="@fighter" />
-                    </form>
                 }
-            </div>
-            }
         </div>
-    </div>
+</div>

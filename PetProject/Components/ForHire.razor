@@ -1,0 +1,50 @@
+﻿@using Microsoft.AspNetCore.Components.Web;
+@using Microsoft.AspNetCore.Components.Authorization;
+@using PetProject.Models;
+@using PetProject.Services;
+@using System.Security.Claims;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<AppUser> SignInManager
+@inject ApplicationDbService DbService
+
+
+<div class="card">
+    <AuthorizeView>
+        <Authorized>
+            <form method="post">
+                <input type="submit" value="Reroll" asp-page-handler="Roll" />
+            </form>
+        </Authorized>
+    </AuthorizeView>
+    <div class="card-columns">
+
+        @foreach (var fighter in DbService.RandomFighters().ToList())
+        {
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-text">@fighter.Name</h3>
+            </div>
+            <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+            <div class="card-text">
+                <p>
+                    @fighter.Level
+                </p>
+                <p>
+                    @fighter.Price
+                </p>
+            </div>
+            <AuthorizeView>
+                <Authorized>
+                    <form method="post">
+                        <input type="submit" value="Buy" asp-page-handler="Buy" asp-route-Fighter="@fighter" />
+                    </form>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+        }
+    </div>
+</div>
+
+@code {
+
+}

@@ -16,7 +16,7 @@ namespace PetProject.Pages
     {
         public SignInManager<AppUser> SignInManager;
         public ApplicationDbService DbService;
-        public IEnumerable<Fighter> Fighters { get; private set; }
+        public List<Fighter> Fighters { get; private set; }
 
         public IndexModel(SignInManager<AppUser> signInManager, ApplicationDbService dbService)
         {
@@ -26,12 +26,12 @@ namespace PetProject.Pages
 
         public void OnGet()
         {
-            Fighters = DbService.RandomFighters(); 
+            Fighters = DbService.RandomFighters().ToList(); 
         }
 
         public void OnPostRoll()
         {
-            Fighters = DbService.RandomFighters();
+            Fighters = DbService.RandomFighters().ToList();
         }
 
         public void OnPostBuy(Fighter fighter)

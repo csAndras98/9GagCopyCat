@@ -186,3 +186,7 @@ C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\bin\Debug\netcoreapp3.1
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.csproj.CoreCompileInputs.cache
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.RazorComponent.input.cache
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\ForHire.razor.g.cs
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\PetProject.dll
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\ForHire.razor.g.cs
