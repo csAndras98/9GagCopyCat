@@ -16,5 +16,6 @@ namespace PetProject.Data
         public DbSet<Fighter> Fighters { get; set; }
         public DbSet<Name> Names { get; set; }
         public DbSet<Portrait> Portraits { get; set; }
+        public DbSet<Opponent> Opponents { get; set; }
     }
 }
