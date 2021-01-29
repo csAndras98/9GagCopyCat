@@ -24,7 +24,7 @@ namespace PetProject.Pages
         public void OnGet(string id)
         {
             AppUser = DbService.GetUser(id);
-            Fighters = DbService.GetMyFighters(id);
+            //Fighters = DbService.GetMyFighters(id);
         }
     }
 }

@@ -1,0 +1,49 @@
+﻿@using PetProject.Models;
+@using PetProject.Services;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Components.Web;
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<AppUser> UserManager
+@inject ApplicationDbService DbService
+
+<CascadingAuthenticationState>
+        <AuthorizeView>
+            <Authorized>
+                <div class="card">
+                    <h3>My Fighters</h3>
+                    <div class="card-columns">
+                        @foreach (var fighter in Fighters)
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-text">@fighter.Name</h3>
+                                </div>
+                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                                <div class="card-text">
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+</CascadingAuthenticationState>
+
+@code {
+    public AppUser User { get; set; }
+    public List<Fighter> Fighters { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        User = await UserManager.GetUserAsync(authState.User);
+        Fighters = DbService.GetMyFighters(User.Id).ToList();
+    }
+
+    public void Refresh()
+    {
+        Fighters = DbService.GetMyFighters(User.Id).ToList();
+    }
+}
