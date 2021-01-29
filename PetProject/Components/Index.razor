@@ -1,0 +1,130 @@
+﻿@using PetProject.Models;
+@using PetProject.Services;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Components.Web;
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<AppUser> UserManager
+@inject ApplicationDbService DbService
+@inject SignInManager<AppUser> SignInManager
+
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
+            <div class="card">
+                <button @onclick="(e => Reroll())">Reroll</button>
+                <div class="card-columns">
+
+                    @foreach (var fighter in NewFighters)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-text">@fighter.Name</h3>
+                            </div>
+                            <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                            <div class="card-text">
+                                <p>
+                                    @fighter.Level
+                                </p>
+                                <p>
+                                    @fighter.Price
+                                </p>
+                            </div>
+                            <button @onclick="(e => Buy(fighter))">Buy</button>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card">
+                <h3>My Fighters</h3>
+                <div class="card-columns">
+                    @foreach (var fighter in Fighters)
+                    {
+                        if (!fighter.inParty)
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-text">@fighter.Name</h3>
+                                </div>
+                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                                <button @onclick="(e => AddToParty(fighter))">Add to Party</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="card">
+                <h3>Raiding Party</h3>
+                <div class="card-columns">
+                    @foreach (var fighter in Party)
+                    {
+                        if (fighter.inParty)
+                        {
+                            <div class="card">
+                                <div class="card-body">
+                                    <h3 class="card-text">@fighter.Name</h3>
+                                </div>
+                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                                <button @onclick="(e => RemoveFromParty(fighter))">Remove from Party</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </Authorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
+
+@code {
+    public AppUser User { get; set; }
+    public List<Fighter> Fighters { get; set; }
+    public List<Fighter> Party { get; set; }
+    public List<Fighter> NewFighters { get; set; }
+
+    public void Refresh()
+    {
+        Party = DbService.GetPartyMembers(User.Id);
+    }
+
+    protected void AddToParty(Fighter fighter)
+    {
+        if (Party.Count() < 4 && !Party.Contains(fighter))
+        {
+            DbService.ChangePartyMember(fighter.Id);
+            Refresh();
+        }
+    }
+
+    public void RemoveFromParty(Fighter fighter)
+    {
+        if (Party.Contains(fighter))
+        {
+            DbService.ChangePartyMember(fighter.Id);
+            Refresh();
+        }
+    }
+
+    void Reroll()
+    {
+        NewFighters = DbService.RandomFighters();
+    }
+
+    void Buy(Fighter fighter)
+    {
+        if (fighter.Price <= User.Funds)
+        {
+            DbService.BuyFighter(fighter, User);
+            NewFighters.Remove(fighter);
+            Fighters = DbService.GetMyFighters(User.Id);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        NewFighters = DbService.RandomFighters();
+        User = DbService.GetUserByName(SignInManager.Context.User.Identity.Name);
+        Fighters = DbService.GetMyFighters(User.Id);
+        Party = DbService.GetPartyMembers(User.Id);
+    }
+}

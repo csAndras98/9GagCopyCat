@@ -106,5 +106,10 @@ namespace PetProject.Services
         {
             return _context.Users.Find(id);
         }
+
+        public AppUser GetUserByName(string name)
+        {
+            return _context.Users.First(u => u.UserName.Equals(name));
+        }
     }
 }

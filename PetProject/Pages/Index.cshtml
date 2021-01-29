@@ -5,8 +5,7 @@
     ViewData["Title"] = "Home page";
 }
 
-@(await Html.RenderComponentAsync<ForHire>(RenderMode.ServerPrerendered))
-@(await Html.RenderComponentAsync<MyFighters>(RenderMode.ServerPrerendered))
+@(await Html.RenderComponentAsync<Components.Index>(RenderMode.ServerPrerendered))
 
 
 <script src="_framework/blazor.server.js"></script>

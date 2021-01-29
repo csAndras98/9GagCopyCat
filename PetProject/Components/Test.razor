@@ -1,0 +1,24 @@
+﻿@using PetProject.Models;
+@using PetProject.Services;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Components.Web;
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<AppUser> UserManager
+@inject ApplicationDbService DbService
+
+<h3>Test</h3>
+
+@code {
+
+    public AppUser User { get; set; }
+    public List<Fighter> Fighters { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        User = await UserManager.GetUserAsync(authState.User);
+    }
+
+}

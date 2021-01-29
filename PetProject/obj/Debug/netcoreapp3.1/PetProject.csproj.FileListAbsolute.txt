@@ -89,7 +89,6 @@ C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.pdb
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.genruntimeconfig.cache
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Pages\Product.cshtml.g.cs
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Pages\CustomerBagPack.cshtml.g.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\bin\Debug\netcoreapp3.1\Microsoft.Data.Sqlite.dll
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\bin\Debug\netcoreapp3.1\Microsoft.DotNet.PlatformAbstractions.dll
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Sqlite.dll
@@ -192,3 +191,7 @@ C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\ForHire.razor.g.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\MyFighters.razor.g.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\MyFighters.razor.g.cs
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\Index.razor.g.cs
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\Index.razor.g.cs
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\Test.razor.g.cs
+C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\Test.razor.g.cs
