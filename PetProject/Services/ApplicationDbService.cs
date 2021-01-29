@@ -30,24 +30,21 @@ namespace PetProject.Services
 
         public void BuyFighter(Fighter fighter, AppUser user)
         {
-            if(user.Funds >= fighter.Price)
+            _context.Add(new Fighter() 
             {
-                _context.Add(new Fighter() 
-                {
-                    Image = fighter.Image,
-                    Name = fighter.Name,
-                    Price = fighter.Price,
-                    Level = fighter.Level,
-                    Morale = fighter.Morale,
-                    Health = fighter.Health,
-                    Accuracy = fighter.Accuracy,
-                    Power = fighter.Power,
-                    Initiative = fighter.Initiative,
-                    UserId = user.Id
-                }
-                );
-                _context.SaveChanges();
+                Image = fighter.Image,
+                Name = fighter.Name,
+                Price = fighter.Price,
+                Level = fighter.Level,
+                Morale = fighter.Morale,
+                Health = fighter.Health,
+                Accuracy = fighter.Accuracy,
+                Power = fighter.Power,
+                Initiative = fighter.Initiative,
+                UserId = user.Id
             }
+            );
+            _context.SaveChanges();
         }
 
         public Fighter[] RandomFighters()
@@ -65,11 +62,18 @@ namespace PetProject.Services
                     Initiative = Random.Next(1, 4),
                     Power = Random.Next(10, 21),
                     Level = Random.Next(1, 4),
+                    Price = Random.Next(0, 5),
                     Name = _context.Names.Find(Random.Next(1, 4)).CharName,
                     Image = _context.Portraits.Find(Random.Next(1, 4)).Image
                 };
             }
             return fighters;
+        }
+
+        public void DeleteFighter(Fighter fighter)
+        {
+            _context.Fighters.Remove(fighter);
+            _context.SaveChanges();
         }
 
         public AppUser GetUser(string id)
