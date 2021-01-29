@@ -18,6 +18,7 @@ namespace PetProject.Models
         public int Accuracy { get; set; }
         public int Power { get; set; }
         public int Initiative { get; set; }
+        public bool inParty { get; set; }
         public string UserId { get; set; }
         public AppUser User { get; set; }
     }

@@ -49,7 +49,7 @@
 
     void Reroll()
     {
-        Fighters = DbService.RandomFighters().ToList();
+        Fighters = DbService.RandomFighters();
     }
 
     void Buy(Fighter fighter)
