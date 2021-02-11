@@ -111,5 +111,10 @@ namespace PetProject.Services
         {
             return _context.Users.First(u => u.UserName.Equals(name));
         }
+
+        public void test(int[] ez, List<int> az)
+        {
+            
+        }
     }
 }

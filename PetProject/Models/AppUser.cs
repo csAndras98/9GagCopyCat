@@ -11,5 +11,7 @@ namespace PetProject.Models
         public int DungeonRank { get; set; }
         public int Best { get; set; }
         public int Funds { get; set; }
+
     }
+
 }

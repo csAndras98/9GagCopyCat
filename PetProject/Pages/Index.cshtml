@@ -1,11 +1,25 @@
 ﻿@page
 @using Components
+@using Microsoft.AspNetCore.Identity
+@using PetProject.Models;
+@using System.Security.Claims;
+@using Services;
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+@inject ApplicationDbService ProductService
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
 }
 
-@(await Html.RenderComponentAsync<Components.Index>(RenderMode.ServerPrerendered))
+@if (SignInManager.IsSignedIn(User))
+{
+    @(await Html.RenderComponentAsync<Components.Index>(RenderMode.ServerPrerendered))
+}
+else
+{
+    <h1>Please Register or Login</h1>
+}
 
 
 <script src="_framework/blazor.server.js"></script>
