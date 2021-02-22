@@ -35,6 +35,7 @@ namespace PetProject
             services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddTransient<ApplicationDbService>();
+            services.AddTransient<ApplicationFightSimulationService>();
             services.AddRazorPages();
             services.AddServerSideBlazor();
         }
