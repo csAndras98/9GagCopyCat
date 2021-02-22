@@ -14,10 +14,9 @@ namespace PetProject.Services
             _dbService = dbService;
         }
 
-        public void SimulateFight(AppUser user) 
+        public void SimulateFight(AppUser user, List<Opponent> opponents, List<Fighter> fighters) 
         {
-            List<Fighter> fighters = _dbService.GetPartyMembers(user.Id);
-            List<Opponent> opponents = _dbService.RandomOpponents(user.DungeonRank);
+
         }
 
     }
