@@ -25,7 +25,7 @@ namespace PetProject.Services
 
             while(opponents.Any(o => o.Health > 0) && fighters.Any(f => f.Health > 0))
             {
-                foreach(Character character in characters)
+                foreach(Character character in characters.Where(c => c.Health > 0))
                 {
                     if (fighters.Contains(character))
                     {
@@ -38,12 +38,16 @@ namespace PetProject.Services
                         Attack(character, targets[_random.Next(0, targets.Count)]);
                     }
                 }
+                _dbService.HealthUpdate(fighters);
             }
         }
 
         private void Attack(Character attacker, Character deffender)
         {
-            throw new NotImplementedException();
+            if(attacker.Accuracy > _random.Next(0, 100))
+            {
+                deffender.Health -= attacker.Power;
+            }
         }
     }
 }

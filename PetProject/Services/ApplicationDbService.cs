@@ -112,9 +112,13 @@ namespace PetProject.Services
             return _context.Users.First(u => u.UserName.Equals(name));
         }
 
-        public void test(int[] ez, List<int> az)
+        public void HealthUpdate(List<Fighter> fighters)
         {
-            
+            foreach(Fighter fighter in fighters)
+            {
+                _context.Fighters.Find(fighter.Id).Health = fighter.Health;
+            }
+            _context.SaveChanges();
         }
     }
 }
