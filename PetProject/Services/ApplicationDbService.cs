@@ -91,10 +91,21 @@ namespace PetProject.Services
             List<Opponent> opponents = new List<Opponent>();
             for (int i = 0; i < Random.Next(1, 5); i++)
             {
-                opponents.Add(possibleOpponents[Random.Next(0, possibleOpponents.Length)]);
+                Opponent opponent = possibleOpponents[Random.Next(0, possibleOpponents.Length)];
+                Opponent opponent1 = new Opponent()
+                {
+                    Id = opponent.Id,
+                    Health = opponent.Health,
+                    Accuracy = opponent.Accuracy,
+                    Image = opponent.Image,
+                    Level = opponent.Level,
+                    Initiative = opponent.Initiative,
+                    Name = opponent.Name,
+                    Power = opponent.Power
+                };
+                opponents.Add(opponent1);
             }
-            List<Opponent> opponentsCopy = opponents.GetRange(0, opponents.Count);
-            return opponentsCopy;
+            return opponents;
         }
 
         public void DeleteFighter(Fighter fighter)
@@ -111,15 +122,6 @@ namespace PetProject.Services
         public AppUser GetUserByName(string name)
         {
             return _context.Users.First(u => u.UserName.Equals(name));
-        }
-
-        public void HealthUpdate(List<Fighter> fighters)
-        {
-            foreach(Fighter fighter in fighters)
-            {
-                _context.Fighters.Find(fighter.Id).Health = fighter.Health;
-            }
-            _context.SaveChanges();
         }
     }
 }

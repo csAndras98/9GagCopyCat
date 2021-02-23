@@ -45,13 +45,13 @@ namespace PetProject.Services
                 }
                 if (opponents.Contains(character))
                 {
-                    Fighter target = fighters[_random.Next(0, opponents.Count)];
+                    Fighter target = fighters[_random.Next(0, fighters.Count)];
                     Attack(character, target, combatLog);
                     if (target.Health <= 0)
                     {
                         fighters.Remove(target);
                         _dbService.DeleteFighter(target);
-                        if (opponents.Count == 0)
+                        if (fighters.Count == 0)
                         {
                             return combatLog;
                         }
