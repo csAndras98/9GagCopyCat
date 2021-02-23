@@ -70,8 +70,11 @@
                     }
                 </div>
             </div>
-            <div>
+            <div class="card">
                 <button @onclick="(e => Fight())">Fight</button>
+                <div class="card-body">
+                    @Fightlog
+                </div>
             </div>
 
 @code {

@@ -51,7 +51,6 @@ namespace PetProject.Services
                     }
                 }
             }
-            _dbService.HealthUpdate(fighters);
             return combatLog.ToString();
         }
 
@@ -60,15 +59,15 @@ namespace PetProject.Services
             if(attacker.Accuracy > _random.Next(0, 100))
             {
                 deffender.Health -= attacker.Power;
-                combatLog.Append($"{attacker} dealt {attacker.Power} damage to {deffender}.\n");
+                combatLog.Append($"\n{attacker.Name} dealt {attacker.Power} damage to {deffender.Name}.");
                 if(deffender.Health <= 0)
                 {
-                    combatLog.Append($"{deffender} Has died.\n");
+                    combatLog.Append($"\n{deffender.Name} Has died.");
                 }
              }
             else
             {
-                combatLog.Append($"{attacker} has missed {deffender}.\n");
+                combatLog.Append($"\n{attacker.Name} has missed {deffender.Name}.");
             }
         }
     }

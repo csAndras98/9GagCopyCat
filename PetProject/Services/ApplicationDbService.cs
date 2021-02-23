@@ -93,7 +93,8 @@ namespace PetProject.Services
             {
                 opponents.Add(possibleOpponents[Random.Next(0, possibleOpponents.Length)]);
             }
-            return opponents;
+            List<Opponent> opponentsCopy = opponents.GetRange(0, opponents.Count);
+            return opponentsCopy;
         }
 
         public void DeleteFighter(Fighter fighter)
