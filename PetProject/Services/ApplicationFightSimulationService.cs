@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace PetProject.Services
@@ -16,12 +17,14 @@ namespace PetProject.Services
             _random = new Random();
         }
 
-        public void SimulateFight(List<Opponent> opponents, List<Fighter> fighters) 
+        public string SimulateFight(List<Opponent> opponents, List<Fighter> fighters) 
         {
             List<Character> characters = new List<Character>();
             characters.AddRange(opponents);
             characters.AddRange(fighters);
             characters.OrderBy(c => c.Initiative);
+
+            StringBuilder combatLog = new StringBuilder();
 
             while(opponents.Any(o => o.Health > 0) && fighters.Any(f => f.Health > 0))
             {
@@ -30,23 +33,33 @@ namespace PetProject.Services
                     if (fighters.Contains(character))
                     {
                         List<Opponent> targets = opponents.Where(o => o.Health > 0).ToList();
-                        Attack(character, targets[_random.Next(0, targets.Count)]);
+                        Attack(character, targets[_random.Next(0, targets.Count)], combatLog);
                     }
                     else
                     {
                         List<Fighter> targets = fighters.Where(f => f.Health > 0).ToList();
-                        Attack(character, targets[_random.Next(0, targets.Count)]);
+                        Attack(character, targets[_random.Next(0, targets.Count)], combatLog);
                     }
                 }
-                _dbService.HealthUpdate(fighters);
             }
+            _dbService.HealthUpdate(fighters);
+            return combatLog.ToString();
         }
 
-        private void Attack(Character attacker, Character deffender)
+        private void Attack(Character attacker, Character deffender, StringBuilder combatLog)
         {
             if(attacker.Accuracy > _random.Next(0, 100))
             {
                 deffender.Health -= attacker.Power;
+                combatLog.Append($"{attacker} dealt {attacker.Power} damage to {deffender}.\n");
+                if(deffender.Health <= 0)
+                {
+                    combatLog.Append($"{deffender} Has died.\n");
+                }
+                else
+                {
+                    combatLog.Append($"{attacker} has missed {deffender}.\n");
+                }
             }
         }
     }
