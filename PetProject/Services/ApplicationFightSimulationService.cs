@@ -17,57 +17,64 @@ namespace PetProject.Services
             _random = new Random();
         }
 
-        public string SimulateFight(List<Opponent> opponents, List<Fighter> fighters) 
+        public List<string> SetUpFight(List<Opponent> opponents, List<Fighter> fighters)
         {
             List<Character> characters = new List<Character>();
             characters.AddRange(opponents);
             characters.AddRange(fighters);
             characters.OrderBy(c => c.Initiative);
+            return SimulateFight(characters, opponents, fighters, new List<string>());
+        }
 
-            StringBuilder combatLog = new StringBuilder();
-
-            while(opponents.Any(o => o.Health > 0) && fighters.Any(f => f.Health > 0))
+        public List<string> SimulateFight(List<Character> characters, List<Opponent> opponents, List<Fighter> fighters, List<string> combatLog) 
+        {
+            foreach(Character  character in characters)
             {
-                foreach(Character character in characters.Where(c => c.Health > 0))
+                if (fighters.Contains(character))
                 {
-                    if (fighters.Contains(character))
+                    Opponent target = opponents[_random.Next(0, opponents.Count)];
+                    Attack(character, target, combatLog);
+                    if(target.Health <= 0)
                     {
-                        Opponent target = opponents[_random.Next(0, opponents.Count)];
-                        Attack(character, target, combatLog);
-                        if(target.Health <= 0)
+                        opponents.Remove(target);
+                        if(opponents.Count == 0)
                         {
-                            opponents.Remove(target);
+                            return combatLog;
                         }
                     }
-                    else if(opponents.Contains(character))
+                }
+                if (opponents.Contains(character))
+                {
+                    Fighter target = fighters[_random.Next(0, opponents.Count)];
+                    Attack(character, target, combatLog);
+                    if (target.Health <= 0)
                     {
-                        Fighter target = fighters[_random.Next(0, fighters.Count)];
-                        Attack(character, target, combatLog);
-                        if(target.Health <= 0)
+                        fighters.Remove(target);
+                        _dbService.DeleteFighter(target);
+                        if (opponents.Count == 0)
                         {
-                            fighters.Remove(target);
-                            _dbService.DeleteFighter(target);
+                            return combatLog;
                         }
                     }
                 }
             }
-            return combatLog.ToString();
+            return SimulateFight(characters, opponents, fighters, combatLog);
         }
 
-        private void Attack(Character attacker, Character deffender, StringBuilder combatLog)
+        private void Attack(Character attacker, Character deffender, List<string> combatLog)
         {
             if(attacker.Accuracy > _random.Next(0, 100))
             {
                 deffender.Health -= attacker.Power;
-                combatLog.Append($"\n{attacker.Name} dealt {attacker.Power} damage to {deffender.Name}.");
+                combatLog.Add($"{attacker.Name} {attacker.Health} dealt {attacker.Power} damage to {deffender.Name} {deffender.Health}.");
                 if(deffender.Health <= 0)
                 {
-                    combatLog.Append($"\n{deffender.Name} Has died.");
+                    combatLog.Add($"{deffender.Name} {deffender.Health} Has died.");
                 }
              }
             else
             {
-                combatLog.Append($"\n{attacker.Name} has missed {deffender.Name}.");
+                combatLog.Add($"{attacker.Name} {attacker.Health} has missed {deffender.Name} {deffender.Health}.");
             }
         }
     }

@@ -73,7 +73,10 @@
             <div class="card">
                 <button @onclick="(e => Fight())">Fight</button>
                 <div class="card-body">
-                    @Fightlog
+                    @foreach(string entry in Fightlog)
+                    {
+                        <p>@entry</p>
+                    }
                 </div>
             </div>
 
@@ -82,7 +85,7 @@
     protected List<Fighter> Fighters { get; set; }
     protected List<Fighter> Party { get; set; }
     protected List<Fighter> NewFighters { get; set; }
-    protected string Fightlog { get; set; }
+    protected List<string> Fightlog { get; set; }
 
 
     protected void Refresh()
@@ -115,7 +118,7 @@
 
     protected void Fight()
     {
-        Fightlog = FightSimulationService.SimulateFight(DbService.RandomOpponents(2), Party);
+        Fightlog = FightSimulationService.SetUpFight(DbService.RandomOpponents(2), Party);
     }
 
     protected void Buy(Fighter fighter)
@@ -130,6 +133,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Fightlog = new List<string>();
         NewFighters = DbService.RandomFighters();
         User = DbService.GetUserByName(SignInManager.Context.User.Identity.Name);
         Fighters = DbService.GetMyFighters(User.Id);
