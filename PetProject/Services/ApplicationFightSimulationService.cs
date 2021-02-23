@@ -32,13 +32,22 @@ namespace PetProject.Services
                 {
                     if (fighters.Contains(character))
                     {
-                        List<Opponent> targets = opponents.Where(o => o.Health > 0).ToList();
-                        Attack(character, targets[_random.Next(0, targets.Count)], combatLog);
+                        Opponent target = opponents[_random.Next(0, opponents.Count)];
+                        Attack(character, target, combatLog);
+                        if(target.Health <= 0)
+                        {
+                            opponents.Remove(target);
+                        }
                     }
-                    else
+                    else if(opponents.Contains(character))
                     {
-                        List<Fighter> targets = fighters.Where(f => f.Health > 0).ToList();
-                        Attack(character, targets[_random.Next(0, targets.Count)], combatLog);
+                        Fighter target = fighters[_random.Next(0, fighters.Count)];
+                        Attack(character, target, combatLog);
+                        if(target.Health <= 0)
+                        {
+                            fighters.Remove(target);
+                            _dbService.DeleteFighter(target);
+                        }
                     }
                 }
             }
@@ -56,10 +65,10 @@ namespace PetProject.Services
                 {
                     combatLog.Append($"{deffender} Has died.\n");
                 }
-                else
-                {
-                    combatLog.Append($"{attacker} has missed {deffender}.\n");
-                }
+             }
+            else
+            {
+                combatLog.Append($"{attacker} has missed {deffender}.\n");
             }
         }
     }

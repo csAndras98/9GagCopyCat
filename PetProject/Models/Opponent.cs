@@ -8,6 +8,6 @@ namespace PetProject.Models
 {
     public class Opponent : Character
     {
-        public int loot { get; set; }
+
     }
 }
