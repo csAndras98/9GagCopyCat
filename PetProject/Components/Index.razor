@@ -73,7 +73,17 @@
             <div class="card">
                 <button @onclick="(e => Fight())">Fight</button>
                 <div class="card-body">
-                    @foreach(string entry in Fightlog)
+                    @User.DungeonRank
+                    @foreach (Opponent opponent in Opponents)
+                    {
+                        <div class="card">
+                            <div class="card-body">
+                                <h3 class="card-text">@opponent.Name</h3>
+                            </div>
+                            <img class="card-img-top" src="@opponent.Image" alt="@opponent.Name" style="height:100%">
+                        </div>
+                    }
+                    @foreach (string entry in Fightlog)
                     {
                         <p>@entry</p>
                     }
@@ -85,6 +95,7 @@
     protected List<Fighter> Fighters { get; set; }
     protected List<Fighter> Party { get; set; }
     protected List<Fighter> NewFighters { get; set; }
+    protected List<Opponent> Opponents { get; set; }
     protected List<string> Fightlog { get; set; }
 
 
@@ -118,7 +129,13 @@
 
     protected void Fight()
     {
-        Fightlog = FightSimulationService.SetUpFight(DbService.RandomOpponents(2), Party);
+        DbService.ChangeDungeonRank(User.Id, User.DungeonRank + 1);
+        if (User.DungeonRank > User.Best)
+        {
+            DbService.ChangeDungeonBest(User.Id, User.DungeonRank);
+        }
+        Opponents = DbService.RandomOpponents(User.DungeonRank);
+        Fightlog = FightSimulationService.SetUpFight(new List<Opponent>(Opponents), Party);
     }
 
     protected void Buy(Fighter fighter)
@@ -134,9 +151,11 @@
     protected override async Task OnInitializedAsync()
     {
         Fightlog = new List<string>();
+        Opponents = new List<Opponent>();
         NewFighters = DbService.RandomFighters();
         User = DbService.GetUserByName(SignInManager.Context.User.Identity.Name);
         Fighters = DbService.GetMyFighters(User.Id);
         Party = DbService.GetPartyMembers(User.Id);
+        DbService.ChangeDungeonRank(User.Id, 1);
     }
 }

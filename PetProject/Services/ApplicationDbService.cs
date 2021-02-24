@@ -123,5 +123,16 @@ namespace PetProject.Services
         {
             return _context.Users.First(u => u.UserName.Equals(name));
         }
+
+        public void ChangeDungeonRank(string id,int rank)
+        {
+            _context.Users.Find(id).DungeonRank = rank;
+            _context.SaveChanges();
+        }
+        public void ChangeDungeonBest(string id, int rank)
+        {
+            _context.Users.Find(id).Best = rank;
+            _context.SaveChanges();
+        }
     }
 }
