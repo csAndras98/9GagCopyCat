@@ -46,7 +46,7 @@
                                     <h3 class="card-text">@fighter.Name</h3>
                                 </div>
                                 <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                                <button @onclick="(e => AddToParty(fighter))">Add to Party</button>
+                                <button @onclick="(e => ChangeParty(fighter))">Add to Party</button>
                             </div>
                         }
                     }
@@ -64,7 +64,7 @@
                                     <h3 class="card-text">@fighter.Name</h3>
                                 </div>
                                 <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                                <button @onclick="(e => RemoveFromParty(fighter))">Remove from Party</button>
+                                <button @onclick="(e => ChangeParty(fighter))">Remove from Party</button>
                             </div>
                         }
                     }
@@ -72,6 +72,7 @@
             </div>
             <div class="card">
                 <button @onclick="(e => Fight())">Fight</button>
+                <button @onclick="(e => Retreat())">Retreat</button>
                 <div class="card-body">
                     @User.DungeonRank
                     @foreach (Opponent opponent in Opponents)
@@ -104,22 +105,17 @@
         Party = DbService.GetPartyMembers(User.Id);
     }
 
-    protected void AddToParty(Fighter fighter)
+    protected void ChangeParty(Fighter fighter)
     {
-        if (Party.Count() < 4 && !Party.Contains(fighter))
+        if (Party.Count() < 4 && !Party.Contains(fighter) && User.DungeonRank == 0)
         {
             DbService.ChangePartyMember(fighter.Id);
-            Refresh();
         }
-    }
-
-    protected void RemoveFromParty(Fighter fighter)
-    {
-        if (Party.Contains(fighter))
+        else if (Party.Contains(fighter) && User.DungeonRank == 0)
         {
             DbService.ChangePartyMember(fighter.Id);
-            Refresh();
         }
+        Refresh();
     }
 
     protected void Reroll()
@@ -136,6 +132,13 @@
         }
         Opponents = DbService.RandomOpponents(User.DungeonRank);
         Fightlog = FightSimulationService.SetUpFight(new List<Opponent>(Opponents), Party);
+    }
+
+    protected void Retreat()
+    {
+        DbService.ChangeDungeonRank(User.Id, 0);
+        Opponents.Clear();
+        Fightlog.Clear();
     }
 
     protected void Buy(Fighter fighter)
@@ -156,6 +159,6 @@
         User = DbService.GetUserByName(SignInManager.Context.User.Identity.Name);
         Fighters = DbService.GetMyFighters(User.Id);
         Party = DbService.GetPartyMembers(User.Id);
-        DbService.ChangeDungeonRank(User.Id, 1);
+        DbService.ChangeDungeonRank(User.Id, 0);
     }
 }
