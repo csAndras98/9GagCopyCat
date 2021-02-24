@@ -186,12 +186,6 @@ C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\PetProject.RazorComponent.input.cache
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\ForHire.razor.g.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\PetProject.dll
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\ForHire.razor.g.cs
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\MyFighters.razor.g.cs
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\MyFighters.razor.g.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\Index.razor.g.cs
 C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\Index.razor.g.cs
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\RazorDeclaration\Components\Test.razor.g.cs
-C:\Users\tompu\OneDrive\Desktop\c#\PetProject\PetProject\obj\Debug\netcoreapp3.1\Razor\Components\Test.razor.g.cs

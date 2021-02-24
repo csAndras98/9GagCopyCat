@@ -36,26 +36,26 @@ namespace PetProject.Services
                 Name = fighter.Name,
                 Price = fighter.Price,
                 Level = fighter.Level,
-                Morale = fighter.Morale,
                 Health = fighter.Health,
                 Accuracy = fighter.Accuracy,
                 Power = fighter.Power,
                 Initiative = fighter.Initiative,
-                inParty = fighter.inParty,
+                InParty = fighter.InParty,
                 UserId = user.Id
             }
             );
+            _context.Users.Find(user.Id).Funds -= fighter.Price;
             _context.SaveChanges();
         }
 
         public List<Fighter> GetPartyMembers(string userId)
         {
-            return _context.Fighters.Where(f => f.UserId.Equals(userId) && f.inParty == true).ToList();
+            return _context.Fighters.Where(f => f.UserId.Equals(userId) && f.InParty == true).ToList();
         }
 
         public void ChangePartyMember(int id)
         {
-            _context.Fighters.Find(id).inParty = !_context.Fighters.Find(id).inParty;
+            _context.Fighters.Find(id).InParty = !_context.Fighters.Find(id).InParty;
             _context.SaveChanges();
         }
 
@@ -66,10 +66,11 @@ namespace PetProject.Services
             List<Fighter> fighters = new List<Fighter>();
             for (int i = 0; i < 6; i++)
             {
+                int HP = Random.Next(60, 101);
                 fighters.Add(new Fighter()
                 {
-                    Health = Random.Next(60, 101),
-                    Morale = 100,
+                    MaxHealth = HP,
+                    Health = HP,
                     Accuracy = Random.Next(40, 91),
                     Initiative = Random.Next(1, 4),
                     Power = Random.Next(10, 21),
@@ -77,7 +78,7 @@ namespace PetProject.Services
                     Price = Random.Next(0, 5),
                     Name = _context.Names.Find(Random.Next(1, 4)).CharName,
                     Image = _context.Portraits.Find(Random.Next(1, 4)).Image,
-                    inParty = false
+                    InParty = false
                 });
             }
             return fighters;

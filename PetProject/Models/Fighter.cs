@@ -9,8 +9,8 @@ namespace PetProject.Models
     public class Fighter : Character
     {
         public int Price { get; set; }
-        public int Morale { get; set; }
-        public bool inParty { get; set; }
+        public int MaxHealth { get; set; }
+        public bool InParty { get; set; }
         public string UserId { get; set; }
         public AppUser User { get; set; }
     }

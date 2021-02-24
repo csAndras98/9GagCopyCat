@@ -39,7 +39,7 @@
                 <div class="card-columns">
                     @foreach (var fighter in Fighters)
                     {
-                        if (!fighter.inParty)
+                        if (!fighter.InParty)
                         {
                             <div class="card">
                                 <div class="card-body">
@@ -57,7 +57,7 @@
                 <div class="card-columns">
                     @foreach (var fighter in Party)
                     {
-                        if (fighter.inParty)
+                        if (fighter.InParty)
                         {
                             <div class="card">
                                 <div class="card-body">
