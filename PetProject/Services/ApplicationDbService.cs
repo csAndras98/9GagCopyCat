@@ -37,6 +37,7 @@ namespace PetProject.Services
                 Price = fighter.Price,
                 Level = fighter.Level,
                 Health = fighter.Health,
+                MaxHealth = fighter.MaxHealth,
                 Accuracy = fighter.Accuracy,
                 Power = fighter.Power,
                 Initiative = fighter.Initiative,
@@ -45,6 +46,11 @@ namespace PetProject.Services
             }
             );
             _context.Users.Find(user.Id).Funds -= fighter.Price;
+            _context.SaveChanges();
+        }
+        public void Loot(int amount, string userId)
+        {
+            _context.Users.Find(userId).Funds += amount;
             _context.SaveChanges();
         }
 
@@ -102,7 +108,8 @@ namespace PetProject.Services
                     Level = opponent.Level,
                     Initiative = opponent.Initiative,
                     Name = opponent.Name,
-                    Power = opponent.Power
+                    Power = opponent.Power,
+                    Loot = opponent.Loot
                 };
                 opponents.Add(opponent1);
             }

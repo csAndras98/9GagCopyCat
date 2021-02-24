@@ -71,8 +71,15 @@
                 </div>
             </div>
             <div class="card">
+                @if(Party.Count > 0)
+                {
                 <button @onclick="(e => Fight())">Fight</button>
-                <button @onclick="(e => Retreat())">Retreat</button>
+                }
+                @if(User.DungeonRank > 0) 
+                {
+                    <button @onclick="(e => Retreat())">@(Party.Count == 0 ? "Defeat" : "Retreat")</button>
+                    <p>Loot: @Loot</p>
+                }
                 <div class="card-body">
                     @User.DungeonRank
                     @foreach (Opponent opponent in Opponents)
@@ -98,7 +105,7 @@
     protected List<Fighter> NewFighters { get; set; }
     protected List<Opponent> Opponents { get; set; }
     protected List<string> Fightlog { get; set; }
-
+    protected int Loot { get; set; }
 
     protected void Refresh()
     {
@@ -125,12 +132,24 @@
 
     protected void Fight()
     {
+        foreach(Fighter fighter in Fighters.Where(f => !f.InParty))
+        {
+            fighter.Health = fighter.MaxHealth;
+        }
         DbService.ChangeDungeonRank(User.Id, User.DungeonRank + 1);
         if (User.DungeonRank > User.Best)
         {
             DbService.ChangeDungeonBest(User.Id, User.DungeonRank);
         }
         Opponents = DbService.RandomOpponents(User.DungeonRank);
+        if(User.DungeonRank == 1)
+        {
+            Loot = Opponents.Select(o => o.Loot).Sum();
+        }
+        else
+        {
+            Loot += Opponents.Select(o => o.Loot).Sum();
+        }
         Fightlog = FightSimulationService.SetUpFight(new List<Opponent>(Opponents), Party);
     }
 
@@ -139,6 +158,10 @@
         DbService.ChangeDungeonRank(User.Id, 0);
         Opponents.Clear();
         Fightlog.Clear();
+        if(Party.Count > 0)
+        {
+            DbService.Loot(Loot, User.Id);
+        }
     }
 
     protected void Buy(Fighter fighter)

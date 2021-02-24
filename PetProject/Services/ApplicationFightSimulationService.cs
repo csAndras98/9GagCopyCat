@@ -66,15 +66,15 @@ namespace PetProject.Services
             if(attacker.Accuracy > _random.Next(0, 100))
             {
                 deffender.Health -= attacker.Power;
-                combatLog.Add($"{attacker.Name} {attacker.Health} dealt {attacker.Power} damage to {deffender.Name} {deffender.Health}.");
+                combatLog.Add($"{attacker.Name} dealt {attacker.Power} damage to {deffender.Name}.");
                 if(deffender.Health <= 0)
                 {
-                    combatLog.Add($"{deffender.Name} {deffender.Health} Has died.");
+                    combatLog.Add($"{deffender.Name} has died.");
                 }
              }
             else
             {
-                combatLog.Add($"{attacker.Name} {attacker.Health} has missed {deffender.Name} {deffender.Health}.");
+                combatLog.Add($"{attacker.Name} has missed {deffender.Name}.");
             }
         }
     }
