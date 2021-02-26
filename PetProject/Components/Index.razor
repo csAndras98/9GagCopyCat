@@ -10,7 +10,8 @@
 @inject ApplicationFightSimulationService FightSimulationService
 @inject SignInManager<AppUser> SignInManager
 
-            <div class="card">
+            <div class="card align-items-center">
+                <h6>Gold: @User.Funds</h6>
                 <button @onclick="(e => Reroll())">Reroll</button>
                 <div class="card-columns">
 
@@ -22,12 +23,20 @@
                             </div>
                             <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
                             <div class="card-text">
-                                <p>
-                                    @fighter.Level
-                                </p>
-                                <p>
-                                    @fighter.Price
-                                </p>
+                                <ul>
+                                    <li>
+                                        Health: @fighter.Health
+                                    </li>
+                                    <li>
+                                        Power: @fighter.Power
+                                    </li>
+                                    <li>
+                                        Initiative: @fighter.Initiative
+                                    </li>
+                                    <li>
+                                        Price: @fighter.Price
+                                    </li>
+                                </ul>
                             </div>
                             <button @onclick="(e => Buy(fighter))">Buy</button>
                         </div>
@@ -41,13 +50,27 @@
                     {
                         if (!fighter.InParty)
                         {
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-text">@fighter.Name</h3>
-                                </div>
-                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                                <button @onclick="(e => ChangeParty(fighter))">Add to Party</button>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-text">@fighter.Name</h3>
+                        </div>
+                        <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                        <ul>
+                            <li>
+                                Health: @fighter.Health
+                            </li>
+                            <li>
+                                Power: @fighter.Power
+                            </li>
+                            <li>
+                                Initiative: @fighter.Initiative
+                            </li>
+                            <li>
+                                @fighter.Price
+                            </li>
+                        </ul>
+                        <button @onclick="(e => ChangeParty(fighter))">Add to Party</button>
+                    </div>
                         }
                     }
                 </div>
@@ -59,29 +82,49 @@
                     {
                         if (fighter.InParty)
                         {
-                            <div class="card">
-                                <div class="card-body">
-                                    <h3 class="card-text">@fighter.Name</h3>
-                                </div>
-                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                                <button @onclick="(e => ChangeParty(fighter))">Remove from Party</button>
-                            </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="card-text">@fighter.Name</h3>
+                        </div>
+                        <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                        <ul>
+                            <li>
+                                Health: @fighter.Health
+                            </li>
+                            <li>
+                                Power: @fighter.Power
+                            </li>
+                            <li>
+                                Initiative: @fighter.Initiative
+                            </li>
+                            <li>
+                                @fighter.Price
+                            </li>
+                        </ul>
+                        <button @onclick="(e => ChangeParty(fighter))">Remove from Party</button>
+                    </div>
                         }
                     }
                 </div>
             </div>
             <div class="card">
-                @if(Party.Count > 0)
+                @if (Party.Count > 0)
                 {
-                <button @onclick="(e => Fight())">Fight</button>
+                    <button @onclick="(e => Fight())">Fight</button>
                 }
-                @if(User.DungeonRank > 0) 
+                @if (User.DungeonRank > 0)
                 {
                     <button @onclick="(e => Retreat())">@(Party.Count == 0 ? "Defeat" : "Retreat")</button>
-                    <p>Loot: @Loot</p>
+                    <div>
+                        <h6>
+                            Current Loot: @Loot
+                        </h6>
+                        <h6>
+                            Current Dungeon Level: @User.DungeonRank
+                        </h6>
+                    </div>
                 }
                 <div class="card-body">
-                    @User.DungeonRank
                     @foreach (Opponent opponent in Opponents)
                     {
                         <div class="card">

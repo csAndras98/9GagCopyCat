@@ -23,6 +23,7 @@ namespace PetProject.Services
             characters.AddRange(opponents);
             characters.AddRange(fighters);
             characters.OrderBy(c => c.Initiative);
+            characters.Reverse();
             return SimulateFight(characters, opponents, fighters, new List<string>());
         }
 

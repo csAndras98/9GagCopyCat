@@ -14,17 +14,6 @@
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
         </li>
-        <li class="nav-item">
-            <p class="nav-link text-dark">
-                <img src="https://www.pngkey.com/png/full/641-6410354_coin-fixed-04-koro-sensei-pixel-art.png" alt="coin" style="height:30px">
-                Coins : @ProductService.GetUser(User.FindFirst(ClaimTypes.NameIdentifier).Value).Funds
-            </p>
-        </li>
-        <li>
-            <p class="nav-link text-dark">
-                Deepest Raid: @ProductService.GetUser(User.FindFirst(ClaimTypes.NameIdentifier).Value).Best
-            </p>
-        </li>
     }
     else
     {
