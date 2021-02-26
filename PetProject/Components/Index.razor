@@ -10,134 +10,172 @@
 @inject ApplicationFightSimulationService FightSimulationService
 @inject SignInManager<AppUser> SignInManager
 
-            <div class="card align-items-center">
-                <h6>Gold: @User.Funds</h6>
-                <button @onclick="(e => Reroll())">Reroll</button>
-                <div class="card-columns">
-
-                    @foreach (var fighter in NewFighters)
-                    {
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="card-text">@fighter.Name</h3>
-                            </div>
-                            <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                            <div class="card-text">
-                                <ul>
-                                    <li>
-                                        Health: @fighter.Health
-                                    </li>
-                                    <li>
-                                        Power: @fighter.Power
-                                    </li>
-                                    <li>
-                                        Initiative: @fighter.Initiative
-                                    </li>
-                                    <li>
-                                        Price: @fighter.Price
-                                    </li>
-                                </ul>
-                            </div>
-                            <button @onclick="(e => Buy(fighter))">Buy</button>
+            <div class="container">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1">Character Shop</a>
+                            </h4>
                         </div>
-                    }
+                        <div id="collapse1" class="panel-collapse collapse">
+                            <div class="card">
+                                <h6>Gold: @User.Funds</h6>
+                                <button @onclick="(e => Reroll())">Reroll</button>
+                                <div class="card-columns">
+                                    @foreach (var fighter in NewFighters)
+                                    {
+                                        <div class="card">
+                                            <div class="card-body align-items-center">
+                                                <h3 class="card-text">@fighter.Name</h3>
+                                            </div>
+                                            <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                                            <div class="card-text">
+                                                <ul>
+                                                    <li>
+                                                        Health: @fighter.Health
+                                                    </li>
+                                                    <li>
+                                                        Power: @fighter.Power
+                                                    </li>
+                                                    <li>
+                                                        Initiative: @fighter.Initiative
+                                                    </li>
+                                                    <li>
+                                                        Price: @fighter.Price
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <button @onclick="(e => Buy(fighter))">Buy</button>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <h3>My Fighters</h3>
-                <div class="card-columns">
-                    @foreach (var fighter in Fighters)
-                    {
-                        if (!fighter.InParty)
-                        {
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-text">@fighter.Name</h3>
+            <div class="container">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse2">My Fighters</a>
+                            </h4>
                         </div>
-                        <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                        <ul>
-                            <li>
-                                Health: @fighter.Health
-                            </li>
-                            <li>
-                                Power: @fighter.Power
-                            </li>
-                            <li>
-                                Initiative: @fighter.Initiative
-                            </li>
-                            <li>
-                                @fighter.Price
-                            </li>
-                        </ul>
-                        <button @onclick="(e => ChangeParty(fighter))">Add to Party</button>
-                    </div>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="card">
-                <h3>Raiding Party</h3>
-                <div class="card-columns">
-                    @foreach (var fighter in Party)
-                    {
-                        if (fighter.InParty)
-                        {
-                    <div class="card">
-                        <div class="card-body">
-                            <h3 class="card-text">@fighter.Name</h3>
-                        </div>
-                        <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
-                        <ul>
-                            <li>
-                                Health: @fighter.Health
-                            </li>
-                            <li>
-                                Power: @fighter.Power
-                            </li>
-                            <li>
-                                Initiative: @fighter.Initiative
-                            </li>
-                            <li>
-                                @fighter.Price
-                            </li>
-                        </ul>
-                        <button @onclick="(e => ChangeParty(fighter))">Remove from Party</button>
-                    </div>
-                        }
-                    }
-                </div>
-            </div>
-            <div class="card">
-                @if (Party.Count > 0)
-                {
-                    <button @onclick="(e => Fight())">Fight</button>
-                }
-                @if (User.DungeonRank > 0)
-                {
-                    <button @onclick="(e => Retreat())">@(Party.Count == 0 ? "Defeat" : "Retreat")</button>
-                    <div>
-                        <h6>
-                            Current Loot: @Loot
-                        </h6>
-                        <h6>
-                            Current Dungeon Level: @User.DungeonRank
-                        </h6>
-                    </div>
-                }
-                <div class="card-body">
-                    @foreach (Opponent opponent in Opponents)
-                    {
-                        <div class="card">
-                            <div class="card-body">
-                                <h3 class="card-text">@opponent.Name</h3>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="card">
+                                <h3>My Fighters</h3>
+                                <div class="card-columns align-items-center">
+                                    @foreach (var fighter in Fighters)
+                                    {
+                                        if (!fighter.InParty)
+                                        {
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h3 class="card-text">@fighter.Name</h3>
+                                                </div>
+                                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                                                <ul>
+                                                    <li>
+                                                        Health: @fighter.Health
+                                                    </li>
+                                                    <li>
+                                                        Power: @fighter.Power
+                                                    </li>
+                                                    <li>
+                                                        Initiative: @fighter.Initiative
+                                                    </li>
+                                                    <li>
+                                                        @fighter.Price
+                                                    </li>
+                                                </ul>
+                                                <button @onclick="(e => ChangeParty(fighter))">Add to Party</button>
+                                            </div>
+                                        }
+                                    }
+                                </div>
                             </div>
-                            <img class="card-img-top" src="@opponent.Image" alt="@opponent.Name" style="height:100%">
                         </div>
-                    }
-                    @foreach (string entry in Fightlog)
-                    {
-                        <p>@entry</p>
-                    }
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" href="#collapse3">Raiding Party</a>
+                            </h4>
+                        </div>
+                        <div id="collapse3" class="panel-collapse collapse">
+                            <div class="card">
+                                <h3>Raiding Party</h3>
+                                <div class="card-columns">
+                                    @foreach (var fighter in Party)
+                                    {
+                                        if (fighter.InParty)
+                                        {
+                                            <div class="card">
+                                                <div class="card-body align-items-center">
+                                                    <h3 class="card-text">@fighter.Name</h3>
+                                                </div>
+                                                <img class="card-img-top" src="@fighter.Image" alt="@fighter.Name" style="height:100%">
+                                                <ul>
+                                                    <li>
+                                                        Health: @fighter.Health
+                                                    </li>
+                                                    <li>
+                                                        Power: @fighter.Power
+                                                    </li>
+                                                    <li>
+                                                        Initiative: @fighter.Initiative
+                                                    </li>
+                                                    <li>
+                                                        @fighter.Price
+                                                    </li>
+                                                </ul>
+                                                <button @onclick="(e => ChangeParty(fighter))">Remove from Party</button>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="card">
+                                @if (Party.Count > 0)
+                                {
+                                    <button @onclick="(e => Fight())">Fight</button>
+                                }
+                                @if (User.DungeonRank > 0)
+                                {
+                                    <button @onclick="(e => Retreat())">@(Party.Count == 0 ? "Defeat" : "Retreat")</button>
+                                    <div>
+                                        <h6>
+                                            Current Loot: @Loot
+                                        </h6>
+                                        <h6>
+                                            Current Dungeon Level: @User.DungeonRank
+                                        </h6>
+                                    </div>
+                                }
+                                <div class="card-body">
+                                    @foreach (Opponent opponent in Opponents)
+                                    {
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h3 class="card-text">@opponent.Name</h3>
+                                            </div>
+                                            <img class="card-img-top" src="@opponent.Image" alt="@opponent.Name" style="height:100%">
+                                        </div>
+                                    }
+                                    @foreach (string entry in Fightlog)
+                                    {
+                                        <p>@entry</p>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
