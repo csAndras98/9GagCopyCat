@@ -83,7 +83,7 @@ namespace PetProject.Services
                     Level = Random.Next(1, 4),
                     Price = Random.Next(0, 5),
                     Name = _context.Names.Find(Random.Next(1, 4)).CharName,
-                    Image = _context.Portraits.Find(Random.Next(1, 4)).Image,
+                    Image = _context.Portraits.Find(Random.Next(15, 17)).Image,
                     InParty = false
                 });
             }
@@ -96,13 +96,14 @@ namespace PetProject.Services
 
             Opponent[] possibleOpponents = _context.Opponents.Where(o => o.Level <= level).ToArray();
             List<Opponent> opponents = new List<Opponent>();
-            for (int i = 0; i < Random.Next(1, 5); i++)
+            for (int i = 0; i < Random.Next(1, 4); i++)
             {
                 Opponent opponent = possibleOpponents[Random.Next(0, possibleOpponents.Length)];
                 Opponent opponent1 = new Opponent()
                 {
                     Id = opponent.Id,
                     Health = opponent.Health,
+                    MaxHealth = opponent.MaxHealth,
                     Accuracy = opponent.Accuracy,
                     Image = opponent.Image,
                     Level = opponent.Level,
